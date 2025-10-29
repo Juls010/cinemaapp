@@ -20,7 +20,7 @@ def verf_rating (value):
 # modelo de la clase Movie, con sus campos y validadores correspondientes
 class Movie (models.Model):
     title = models.CharField(max_length=100)
-    synopsis = models.CharField(max_length=1000)
+    synopsis = models.TextField(max_length=1000)
     genre = models.CharField(max_length=20)
     director = models.CharField(max_length=100)
     release_year = models.IntegerField(validators=[verf_year])

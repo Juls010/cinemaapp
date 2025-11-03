@@ -4,6 +4,7 @@
             {% for movie in movies %}
                 <li>{{movie}}</li>
                 <a href="{% url "movie_edit" movie.pk %}">Edit</a>
+                <a href="{% url "movie_delete" movie.pk %}">Edit</a>
             {% empty %}
                 There are no movies
             {% endfor %}

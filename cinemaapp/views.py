@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from cinemaapp.forms import MovieForm
 from cinemaapp.models import Movie
@@ -31,3 +31,10 @@ def movie_edit(request, pk):
 def movie_list(request):
     movies = Movie.objects.all()
     return render(request, "cinemaapp/list.html", {"movies": movies})
+
+def movie_delete(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method =="POST":
+        movie.delete()
+        return redirect('movie_list')
+    return render(request, "cinemaapp/confirm_delete.html", {})

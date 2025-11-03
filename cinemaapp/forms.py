@@ -25,7 +25,8 @@ class MovieForm (forms.ModelForm):
         # aquí mostramos en este caso el calendario a los campos date
         widgets = {
             "release_date" :  forms.DateInput(attrs={"type":"date"}),
-            "announcement_date": forms.DateInput(attrs={"type": "date"})
+            "announcement_date": forms.DateInput(attrs={"type": "date"}),
+            "actors" : forms.CheckboxSelectMultiple()
         }
 
         # Manejo de mensajes de errores para cada campo y cada error en especifico

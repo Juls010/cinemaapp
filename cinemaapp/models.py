@@ -17,11 +17,28 @@ def verf_rating (value):
     if value < 0.0 or value > 10.0:
         raise "The average rating must be between 0,0 and 10,0"
 
+
+class Actor(models.Model):
+    name = models.CharField()
+    last_name = models.CharField()
+
+    def __str__(self):
+        return f'{self.name} {self.last_name}'
+
+
+
+
 # modelo de la clase Movie, con sus campos y validadores correspondientes
 class Movie (models.Model):
     title = models.CharField(max_length=100)
     synopsis = models.TextField(max_length=1000)
-    genre = models.CharField(max_length=20)
+    GENRES = [
+        ("AC","Action"),
+        ("SC", "Sci-Fi"),
+        ("CO", "Comedy"),
+        ("DR", "Drama")
+    ]
+    genre = models.CharField(max_length=20, choices=GENRES)
     director = models.CharField(max_length=100)
     release_year = models.IntegerField(validators=[verf_year])
     duration = models.IntegerField(validators=[verf_duration])
@@ -31,6 +48,10 @@ class Movie (models.Model):
     subtitles_language = models.CharField()
     imdb = models.URLField(blank=True)
     rating = models.DecimalField(blank=True ,max_digits=3, decimal_places=1, validators=[verf_rating])
+    actors = models.ManyToManyField(Actor, blank=True)
+
+
+
 
     #Método que coge datos del propio modelo (self)
     #Verifica si release_date es anterior a release_year
